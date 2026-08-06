@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Learn all the important words in Egyptian Arabic!">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&family=Noto+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<title>Learn Egyptian Arabic - Nouns</title>
+<description>
+<style>
+  /* Add your CSS styles here */
+  .hidden {
+    opacity: 0;
+  }
+  body, button {
+    font-family: "Noto Sans", sans-serif;
+    user-select: none;
+  }
+
+  body, html {
+    height: 100%;
+    background-color: #F4F4EA;
+    color: #2B2B35;
+    margin: auto;
+    text-align: center;
+    max-width: 600px;
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0 1em 0 1em;
+  }
+  #header {
+  }
+  #subjectList {
+    background-color: #ff00ff;
+    width:100%;
+    display: flex;
+  }
+  .left {
+    float:left;
+  }
+  #navlist {
+    float: right;
+    padding: 0;
+    margin:0;
+  }
+  #contents {
+    flex:1;
+    /*background-color: #ffffff;
+    border-style: solid;
+    border-width: .25em;
+    border-radius: .5em;*/
+    cursor: default;
+    margin:0;
+
+  }
+  #emoji-p {
+    transition: .2s ease-in-out 0s;
+    outline: none;
+    user-select: none;
+    text-decoration: none;
+  }
+  #emoji-p:active {
+    transform: scale(1.25);
+  }
+  #reveal {
+    margin:0;
+  }
+  #emoji {
+    font-size: 10em;
+    text-align: left;
+
+  }
+  #english-p {
+    font-size: 2em;
+    text-align: center;
+  }
+  #translation-p {
+    font-family: "Rubik", sans-serif;
+    font-size: 5em;
+    text-align: left;
+    margin: 0;
+    text-align: center;
+  }
+  #phonetic-p {
+    font-size: 1em;
+    color: #D8533D;
+    text-align: right;
+  }
+  #gender-p {
+    text-align: right;
+  }
+  #footer {
+  }
+  buttonB {
+    flex-grow: .5;
+    transition-duration: 0.25s;
+    border-style: solid;
+    border-color: #D8533D;
+    transition: .2s ease-in-out 0s;
+  }
+  buttonB:hover {
+   background-color: #D8533D; /* Green */
+   color: white;
+   transform: scale(1.1);
+  }
+  .small {
+    border-radius: .5em;
+    padding: .5em;
+    margin-right: .5em;
+    font-size: .75em;
+  }
+  .large {
+    transition: .2s ease-in-out 0s;
+    outline: none;
+    user-select: none;
+    text-decoration: none;
+  }
+  .large:active {
+    transform: scale(1.25);
+
+  }
+  .spread {
+    display: flex;
+    width:100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 1em 0;
+  }
+  #subjectTitle {
+    font-size: 2em;
+    padding:2em;
+  }
+}
+</style>
+</head>
+<body>
+  <div class="wrapper">
+    <div id="header" class="spread">
+      <a href="spanish.html"><img src="images/logo_ar.svg" alt="Lingobud - Arabic" width="48px" height="48px" class="left" style="border-radius: 2em;"></a>
+      <ul id="navlist">
+        <div id="subjectMenu" class="spread" style="padding:0">
+          <buttonB class="small" onclick="selectSubject(animals, 'Animals')">Animals</buttonB>
+          <buttonB class="small" onclick="selectSubject(food, 'Food')">Food</buttonB>
+          <buttonB class="small" onclick="selectSubject(places, 'Places')">Places</buttonB>
+          <buttonB class="small" onclick="selectSubject(verbs, 'verbs')">Verbs</buttonB>
+          <buttonB class="small" onclick="selectSubject(adverbs, 'verbs')">Adverbs</buttonB>
+          <buttonB class="small" onclick="selectSubject(prepositions, 'verbs')">Prepositions</buttonB>
+          <buttonB class="small" onclick="selectSubject(colours, 'Colours')" style="margin-right: 0;">Colours</buttonB>
+        </div>
+      </ul>
+    </div>
+    <!--<div id="subjectTitle">Animals</div>-->
+    <div id="contents">
+      <div id="emoji-p" onclick="playAudio()"><span id="emoji"></span></div>
+      <p id="english-p"><span id="english"></span></p>
+    </div>
+    <div id="reveal">
+      <p id="translation-p"><span id="translation" class="hidden"></span></p>
+      <p id="phonetic-p"><span id="phonetic" class="hidden"></span></p>
+    </div>
+    <div id="footer" class="spread">
+      <div class="large" onclick="selectRandomItem()"><img src="images/btn_shuffle.svg" alt="Shuffle" width="80px" height="80px"></div>
+      <div class="large" onclick="revealAnswer()" style="margin-right: 0;"><img src="images/btn_reveal.svg" alt="Reveal" width="80px" height="80px"></div>
+    </div>
+  </div>
+
+<script>
+// Define your array of items
+var animals = [
+  {english: "Dog", translation: "كلب", gender: "m", phonetic: "<u>Kalb</u>", emoji: "🐶", audio: "animals/dog.mp3"},
+  {english: "Cat", translation: "قـُطّـَة", gender: "f", phonetic: "<u>'ut</u>ta", emoji: "🐱", audio: "animals/cat.mp3"},
+  {english: "Mouse", translation: "فار", gender: "m", phonetic: "<u>faar</u>", emoji: "🐭", audio: "animals/mouse.mp3"},
+  {english: "Camel", translation: "جـَمـَل", gender: "m", phonetic: "<u>ga</u>mal", emoji: "🐪", audio: "animals/camel.mp3"},
+  {english: "Rabbit", translation: "أرنـَب", gender: "m", phonetic: "<u>'ar</u>nab", emoji: "🐰", audio: "animals/rabbit.mp3"},
+  {english: "Bear", translation: "دبّ", gender: "m", phonetic: "<u>dibb</u>", emoji: "🐻", audio: "animals/bear.mp3"},
+  {english: "Tiger", translation: "نـِمر", gender: "m", phonetic: "<u>nmir</u>", emoji: "🐯", audio: "animals/tiger.mp3"},
+  {english: "Lion", translation: "أسـَد", gender: "m", phonetic: "<u>'a</u>sad", emoji: "🦁", audio: "animals/lion.mp3"},
+  {english: "Monkey", translation: "قـِرد", gender: "m", phonetic: "<u>'ird</u>", emoji: "🐵", audio: "animals/monkey.mp3"},
+  {english: "Elephant", translation: "فيل", gender: "m", phonetic: "<u>feel</u>", emoji: "🐘", audio: "animals/elephant.mp3"},
+  {english: "Snake", translation: "ثـَعبان", gender: "m", phonetic: "thaAb<u>aen</u>", emoji: "🐍", audio: "animals/snake.mp3"},
+  {english: "Insect", translation: "حـَشـَرة", gender: "f", phonetic: "ha<u>sha</u>ra", emoji: "🐛", audio: "animals/insect.mp3"},
+  {english: "Bird", translation: "طير", gender: "m", phonetic: "<u>teer</u>", emoji: "🐦", audio: "animals/bird.mp3"},
+  {english: "Fish", translation: "سـَمـَك",gender: "coll", phonetic: "<u>sa</u>mak", emoji: "🐟", audio: "animals/fish.mp3"},
+  {english: "Cow", translation: "بـَقـَر",gender: "coll", phonetic: "<u>ba</u>'ar", emoji: "🐮", audio: "animals/cow.mp3"},
+  {english: "Horse", translation: "حـُصان", gender: "m", phonetic: "hu<u>saan</u>", emoji: "🐴", audio: "animals/horse.mp3"},
+  {english: "Chicken", translation: "فـَرخـَة", gender: "f", phonetic: "<u>far</u>cha", emoji: "🐔", audio: "animals/chicken.mp3"},
+  {english: "Pig", translation: "خـَنزير", gender: "m", phonetic: "chan<u>zeer</u>", emoji: "🐷", audio: "animals/pig.mp3"},
+  {english: "Sheep", translation: "خـَروف", gender: "m", phonetic: "<u>cha</u>roof", emoji: "🐑", audio: "animals/sheep.mp3"},
+  // Add more items as needed
+];
+var food = [
+  {english: "Apple", translation: "تـُفّاح", gender: "coll", phonetic: "tuf<u>faeh</u>", emoji: "🍏", audio: "food/apple.mp3"},
+  {english: "Orange", translation: "بـُرتـُقان", gender: "coll", phonetic: "burtu'aan", emoji: "🍊", audio: "food/orange.mp3"},
+  {english: "Banana", translation: "موز", gender: "coll", phonetic: "mooz", emoji: "🍌", audio: "food/banana.mp3"},
+  {english: "Strawberry", translation: "فـَراولـَة", gender: "coll", phonetic: "fa<u>raw</u>la", emoji: "🍓", audio: "food/strawberry.mp3"},
+  {english: "Lemon", translation: "لـَيمون", gender: "coll", phonetic: "<u>lay</u>moon", emoji: "🍋", audio: "food/lemon.mp3"},
+  {english: "Tomato", translation: "طـَماطـِم", gender: "coll", phonetic: "ta<u>maa</u>tin", emoji: "🍅", audio: "food/tomato.mp3"},
+  {english: "Carrot", translation: "جـَزر", gender: "coll", phonetic: "g<u>a</u>zar", emoji: "🥕", audio: "food/carrot.mp3"},
+  {english: "Onion", translation: "بـَصـَل", gender: "coll", phonetic: "<u>ba</u>sal", emoji: "🧅", audio: "food/onion.mp3"},
+  {english: "Garlic", translation: "ثوم", gender: "coll", phonetic: "<u>thoom</u>", emoji: "🧄", audio: "food/garlic.mp3"},
+  {english: "Potato", translation: "بـَطاطـِس", gender: "coll", phonetic: "ba<u>taa</u>tis", emoji: "🥔", audio: "food/potato.mp3"},
+  {english: "Pepper", translation: "فـِلفـِل رومي", gender: "m", phonetic: "<u>fil</u>fil <u>roo</u>mi", emoji: "🫑", audio: "food/pepper.mp3"},
+  {english: "Cucumber", translation: "خـِيا َر", gender: "coll", phonetic: "<u>chiyaar</u>", emoji: "🥒", audio: "food/cucumber.mp3"},
+  {english: "Aubergine", translation: "بـِتـِنجان", gender: "coll", phonetic: "biting<u>aen</u>", emoji: "🍆", audio: "food/aubergine.mp3"},
+  {english: "Courgette", translation: "كوسـَة", gender: "coll", phonetic: "<u>koo</u>sa", emoji: "", audio: "food/courgette.mp3"},
+  {english: "Cheese", translation: "جـِبنـَة", gender: "f", phonetic: "g<u>ib</u>na", emoji: "🧀", audio: "food/cheese.mp3"},
+  {english: "Milk", translation: "لـَبـَن", gender: "m", phonetic: "<u>la</u>ban", emoji: "🥛", audio: "food/milk.mp3"},
+  {english: "Butter", translation: "ز ِبدة", gender: "f", phonetic: "<u>zib</u>da", emoji: "🧈", audio: "food/butter.mp3"},
+  {english: "Eggs", translation: "بيض", gender: "coll", phonetic: "<u>beed</u>", emoji: "🥚", audio: "food/eggs.mp3"},
+  {english: "Bread", translation: "عيش", gender: "m", phonetic: "<u>Aeesh</u>", emoji: "🍞", audio: "food/bread.mp3"},
+  {english: "Pasta", translation: "مـَكـَرونـَة", gender: "f", phonetic: "maka<u>roon</u>a", emoji: "🍝", audio: "food/pasta.mp3"},
+  {english: "Rice", translation: "رزّ", gender: "m", phonetic: "</u>ruzz</u>", emoji: "🍚", audio: "food/rice.mp3"},
+  {english: "Chicken", translation: "فـِراخ", gender: "m", phonetic: "fi<u>raech</u>", emoji: "🍗", audio: "food/chicken.mp3"},
+  {english: "Beef", translation: "لـَحمـَة", gender: "f", phonetic: "<u>lah</u>ma", emoji: "🥩", audio: "food/beef.mp3"},
+];
+var colours = [
+  {english: "Black", translation: "إسود", gender: "m", phonetic: "<u>'is</u>wid", emoji: "⚫", audio: "colours/black.mp3"},
+  {english: "Grey", translation: "ر ُصاصي", gender: "m", phonetic: "ru<u>saa</u>si", emoji: "⚫", audio: "colours/grey.mp3"},
+  {english: "White", translation: "أبيـَض", gender: "m", phonetic: "<u>'a</u>byad", emoji: "⚪", audio: "colours/white.mp3"},
+  {english: "Red", translation: "أحمـَر", gender: "m", phonetic: "<u>'ah</u>mar", emoji: "🔴", audio: "colours/red.mp3"},
+  {english: "Orange", translation: "بـُرتـُقاني", gender: "m", phonetic: "burtu'<u>aa</u>ni", emoji: "🟠", audio: "colours/orange.mp3"},
+  {english: "Yellow", translation: "أصفـَر", gender: "m", phonetic: "<u>'as</u>far", emoji: "🟡", audio: "colours/yellow.mp3"},
+  {english: "Green", translation: "أخضـَر", gender: "m", phonetic: "<u>'ach</u>dar", emoji: "🟢", audio: "colours/green.mp3"},
+  {english: "Blue", translation: "أزر َق", gender: "m", phonetic: "azra'", emoji: "🔵", audio: "colours/blue.mp3"},
+  {english: "Purple", translation: "بـَنـَفسـِجي", gender: "invar", phonetic: "banaf<u>sigi</u>", emoji: "🟣", audio: "colours/purple.mp3"},
+  {english: "Brown", translation: "بـُنّي", gender: "invar", phonetic: "<u>bun</u>ni", emoji: "🟤", audio: "colours/brown.mp3"},
+  /*{english: "Gold", translation: "ذ َهـَب", gender: "m", phonetic: "<u>za</u>hab", emoji: "", audio: "sound.wav"},
+  {english: "Silver", translation: "فـَضّـَة", gender: "f", phonetic: "<u>fa</u>dda", emoji: "", audio: "sound.wav"},*/
+];
+var places = [
+  {english: "Bike", translation: "عـَجـَلـَة", gender: "f", phonetic: "Aag<u>a</u>la", emoji: "🚲", audio: "places/bicycle.mp3"},
+  {english: "Car", translation: "عـَربـِيـَة", gender: "f", phonetic: "Aa<u>ra</u>biya", emoji: "🚗", audio: "places/car.mp3"},
+  {english: "Bus", translation: "أتوبيس", gender: "m", phonetic: "utoo<u>baas</u>", emoji: "🚌", audio: "places/bus.mp3"},
+  {english: "Train", translation: "اطر", gender: "m", phonetic: "<u>atr</u>", emoji: "🚂", audio: "places/train.mp3"},
+  {english: "Aeroplane", translation: "طـَيا َر َة", gender: "f", phonetic: "<u>tayaa</u>ra", emoji: "🛩️", audio: "places/aeroplane.mp3"},
+  {english: "Boat", translation: "مـَركـِب", gender: "m", phonetic: "<u>mar</u>kib", emoji: "⛵", audio: "places/boat.mp3"},
+  {english: "Helicopter", translation: "هيليكـُبتـُر", gender: "m", phonetic: "heelee<u>kub</u>tur", emoji: "🚁", audio: "places/helicopter.mp3"},
+  {english: "Kitchen", translation: "مـَطبـَخ", gender: "m", phonetic: "<u>mat</u>bach", emoji: "", audio: "places/kitchen.mp3"},
+  {english: "Bathroom", translation: "حـَمّا َم", gender: "m", phonetic: "ham<u>maem</u>", emoji: "", audio: "places/bathroom.mp3"},
+  {english: "Lounge", translation: " ُوضـِة قـُعا َد", gender: "f", phonetic: "'uoo<u>dit</u> 'u<u>Aaed</u>", emoji: "", audio: "places/lounge.mp3"},
+  {english: "Bedroom", translation: "أ ُوضـِة نوم", gender: "f", phonetic: "'uoo<u>dit</u> <u>noom</u>", emoji: "", audio: "places/bedroom.mp3"},
+  {english: "Office", translation: "مـَكتـَب", gender: "m", phonetic: "<u>mak</u>tab", emoji: "", audio: "places/office.mp3"},
+  {english: "House", translation: "بـِيت", gender: "m", phonetic: "<u>biyt</u>", emoji: "", audio: "places/house.mp3"},
+  {english: "Apartment", translation: "شـَقّـَة", gender: "f", phonetic: "<u>sha'</u>'a", emoji: "", audio: "places/apartment.mp3"},
+  {english: "Shop", translation: "مـَحـَلّ", gender: "m", phonetic: "ma<u>hall</u>", emoji: "", audio: "places/shop.mp3"},
+  {english: "Street", translation: "شارع", gender: "m", phonetic: "<u>shae</u>riA", emoji: "", audio: "places/street.mp3"},
+  {english: "Station", translation: "مـَحـَطّـَة", gender: "f", phonetic: "ma<u>hat</u>ta", emoji: "", audio: "places/station.mp3"},
+  {english: "Airport", translation: "مـَطا َر", gender: "m", phonetic: "ma<u>taar</u>", emoji: "", audio: "places/airport.mp3"},
+  {english: "Restaurant", translation: "مـَطعـَم", gender: "m", phonetic: "<u>mat</u>Aam", emoji: "", audio: "places/restaurant.mp3"},
+  {english: "Cinema", translation: "سينـِما", gender: "m", phonetic: "see<u>n</u>ima", emoji: "", audio: "places/cinema.mp3"},
+
+  //
+];
+var verbs = [
+/*
+  // ===== PRESENT (Imperfect) =====
+  {english: "I do",        translation: "بَعْمَل",     phonetic: "ba<u>‘mal</u>",      emoji: "🟢", 	audio: "verbs/i_do.mp3"},
+  {english: "You do (m)",  translation: "بِتَعْمَل",    phonetic: "bit<u>‘mal</u>",     emoji: "🟢", 	audio: "verbs/you_m_do.mp3"},
+  {english: "You do (f)",  translation: "بِتَعْمَلي",   phonetic: "bit‘ma<u>li</u>",    emoji: "🟢", 	audio: "verbs/you_f_do.mp3"},
+  {english: "He does",     translation: "بِيَعْمَل",    phonetic: "biy<u>‘mal</u>",     emoji: "🟢", 	audio: "verbs/he_does.mp3"},
+  {english: "She does",    translation: "بِتَعْمَل",    phonetic: "bit<u>‘mal</u>",     emoji: "🟢", 	audio: "verbs/she_does.mp3"},
+  {english: "We do",       translation: "بِنَعْمَل",    phonetic: "bin<u>‘mal</u>",     emoji: "🟢", 	audio: "verbs/we_do.mp3"},
+  {english: "You do (pl)", translation: "بِتَعْمَلوا",  phonetic: "bit‘mal<u>u</u>",    emoji: "🟢", 	audio: "verbs/you_pl_do.mp3"},
+  {english: "They do",     translation: "بِيَعْمَلوا",  phonetic: "biy‘mal<u>u</u>",    emoji: "🟢", 	audio: "verbs/they_do.mp3"},
+
+  // ===== PERFECT (Past) =====
+  {english: "I did",        translation: "عَمِلْت",     phonetic: "‘a<u>milt</u>",     emoji: "🟢", 	audio: "verbs/i_did.mp3"},
+  {english: "You did (m)",  translation: "عَمِلْت",     phonetic: "‘a<u>milt</u>",     emoji: "🟢", 	audio: "verbs/you_m_did.mp3"},
+  {english: "You did (f)",  translation: "عَمِلْتي",    phonetic: "‘amil<u>ti</u>",    emoji: "🟢", 	audio: "verbs/you_f_did.mp3"},
+  {english: "He did",       translation: "عَمِل",      phonetic: "‘a<u>mil</u>",      emoji: "🟢", 	audio: "verbs/he_did.mp3"},
+  {english: "She did",      translation: "عَمِلِت",     phonetic: "‘ami<u>lit</u>",    emoji: "🟢", 	audio: "verbs/she_did.mp3"},
+  {english: "We did",       translation: "عَمِلْنا",    phonetic: "‘amil<u>na</u>",    emoji: "🟢", 	audio: "verbs/we_did.mp3"},
+  {english: "You did (pl)", translation: "عَمِلْتوا",   phonetic: "‘amilt<u>u</u>",    emoji: "🟢", 	audio: "verbs/you_pl_did.mp3"},
+  {english: "They did",     translation: "عَمِلوا",    phonetic: "‘amil<u>u</u>",     emoji: "🟢", 	audio: "verbs/they_did.mp3"},
+
+  // ===== HA-IMPERFECT (Future) =====
+  {english: "I will do",        translation: "هَعْمَل",      phonetic: "ha<u>‘mal</u>",      audio: "verbs/i_will_do.mp3"},
+  {english: "You will do (m)",  translation: "هِتَعْمَل",    phonetic: "hit<u>‘mal</u>",     audio: "verbs/you_m_will_do.mp3"},
+  {english: "You will do (f)",  translation: "هِتَعْمَلي",   phonetic: "hit‘ma<u>li</u>",    audio: "verbs/you_f_will_do.mp3"},
+  {english: "He will do",       translation: "هِيَعْمَل",    phonetic: "hiy<u>‘mal</u>",     audio: "verbs/he_will_do.mp3"},
+  {english: "She will do",      translation: "هِتَعْمَل",    phonetic: "hit<u>‘mal</u>",     audio: "verbs/she_will_do.mp3"},
+  {english: "We will do",       translation: "هِنَعْمَل",    phonetic: "hin<u>‘mal</u>",     audio: "verbs/we_will_do.mp3"},
+  {english: "You will do (pl)", translation: "هِتَعْمَلوا",  phonetic: "hit‘mal<u>u</u>",    audio: "verbs/you_pl_will_do.mp3"},
+  {english: "They will do",     translation: "هِيَعْمَلوا",  phonetic: "hiy‘mal<u>u</u>",    audio: "verbs/they_will_do.mp3"},
+
+  // ===== ACTIVE PARTICIPLE =====
+  {english: "I am doing",        translation: "عامِل",       phonetic: "‘a<u>mil</u>",       audio: "verbs/i_am_doing.mp3"},
+  {english: "You are doing (m)", translation: "عامِل",       phonetic: "‘a<u>mil</u>",       audio: "verbs/you_m_am_doing.mp3"},
+  {english: "You are doing (f)", translation: "عامِلة",      phonetic: "‘a<u>mla</u>",       audio: "verbs/you_f_am_doing.mp3"},
+  {english: "He is doing",       translation: "عامِل",       phonetic: "‘a<u>mil</u>",       audio: "verbs/he_is_doing.mp3"},
+  {english: "She is doing",      translation: "عامِلة",      phonetic: "‘a<u>mla</u>",       audio: "verbs/she_is_doing.mp3"},
+  {english: "We are doing",      translation: "عامْلين",     phonetic: "‘aml<u>een</u>",     audio: "verbs/we_are_doing.mp3"},
+  {english: "You are doing (pl)",translation: "عامْلين",     phonetic: "‘aml<u>een</u>",     audio: "verbs/you_pl_are_doing.mp3"},
+  {english: "They are doing",    translation: "عامْلين",     phonetic: "‘aml<u>een</u>",     audio: "verbs/they_are_doing.mp3"},
+*/
+{english:"To think",		translation:"فا َكـِر",		emoji: "🟢", 	audio:"verbs/think.mp3"},
+{english:"To buy",		translation:"إشتـَرى",		emoji: "🟢", 	audio:"verbs/buy.mp3"},
+{english:"To sleep",		translation:"نا َم",		emoji: "🟢", 	audio:"verbs/sleep.mp3"},
+{english:"To drink",		translation:"شـِر ِب",		emoji: "🟢", 	audio:"verbs/drink.mp3"},
+{english:"To eat",		translation:"كـَل",		emoji: "🟢", 	audio:"verbs/eat.mp3"},
+{english:"To write",		translation:"كـَتـَب",		emoji: "🟢", 	audio:"verbs/write.mp3"},
+{english:"To work",		translation:"إشتـَغـَل",		emoji: "🟢", 	audio:"verbs/work.mp3"},
+{english:"To want",		translation:"عا َز",		emoji: "🟢", 	audio:"verbs/want.mp3"},
+{english:"To walk",		translation:"مـِشي",		emoji: "🟢", 	audio:"verbs/walk.mp3"},
+{english:"To try",		translation:"حا َو ِل",		emoji: "🟢", 	audio:"verbs/try.mp3"},
+{english:"To be able",		translation:"قـِد ِر",		emoji: "🟢", 	audio:"verbs/can.mp3"},
+{english:"To say",		translation:"قا َل",		emoji: "🟢", 	audio:"verbs/say.mp3"},
+{english:"To need",		translation:"إحتا َج",		emoji: "🟢", 	audio:"verbs/need.mp3"},
+{english:"To love",		translation:"حـَبّ",		emoji: "🟢", 	audio:"verbs/love.mp3"},
+{english:"To live",		translation:"سـِكـِن",		emoji: "🟢", 	audio:"verbs/live.mp3"},
+{english:"To know",		translation:"عـِر ِف",		emoji: "🟢", 	audio:"verbs/know.mp3"},
+{english:"To help",		translation:"سا َعـِد",		emoji: "🟢", 	audio:"verbs/help.mp3"},
+{english:"To own",		translation:"إمتـَلـَك",		emoji: "🟢", 	audio:"verbs/own.mp3"},
+{english:"To give",		translation:"إدّى",		emoji: "🟢", 	audio:"verbs/give.mp3"},
+{english:"To begin",		translation:"بـَدأ",		emoji: "🟢", 	audio:"verbs/begin.mp3"},
+{english:"To become",		translation:"بـَقى",		emoji: "🟢", 	audio:"verbs/become.mp3"},
+{english:"To understand",	translation:"فـِهـِم",		emoji: "🟢", 	audio:"verbs/understand.mp3"},
+];
+
+var adverbs = [
+
+// LOCATION
+{english:"here",		translation:"هـِنا َ",		emoji:"📍",	audio:"adverbs/location_here.mp3"},
+{english:"there",		translation:"هـِنا َك",		emoji:"📍",	audio:"adverbs/location_there.mp3"},
+{english:"everywhere",		translation:"في كـُل مـَكا َن",	emoji:"📍",	audio:"adverbs/location_everywhere.mp3"},
+{english:"nowhere",		translation:"و َلا َ حـِتّـَة",	emoji:"📍",	audio:"adverbs/location_nowhere.mp3"},
+{english:"inside",		translation:"دا َخـِل",		emoji:"📍",	audio:"adverbs/location_inside.mp3"},
+{english:"outside",		translation:"خا َر ِج",		emoji:"📍",	audio:"adverbs/location_outside.mp3"},
+{english:"somewhere",		translation:"أي مـَكا َن",		emoji:"📍",	audio:"adverbs/location_somewhere.mp3"},
+{english:"anywhere",		translation:"أي حـِتّـَة",		emoji:"📍",	audio:"adverbs/location_anywhere.mp3"},
+{english:"up",			translation:"فوق",		emoji:"📍",	audio:"adverbs/location_up.mp3"},
+{english:"down",		translation:"تـَحت",		emoji:"📍",	audio:"adverbs/location_down.mp3"},
+{english:"left",		translation:"شـَما َل",		emoji:"📍",	audio:"adverbs/location_left.mp3"},
+{english:"right",		translation:"يـِمين",		emoji:"📍",	audio:"adverbs/location_right.mp3"},
+{english:"straight ahead",	translation:"عـَلى طول",		emoji:"📍",	audio:"adverbs/location_straight.mp3"},
+
+// TIME
+{english:"now",			translation:"د ِلو َقتي",		emoji:"⏱️",	audio:"adverbs/time_now.mp3"},
+{english:"early",		translation:"بـَدري",		emoji:"⏱️",	audio:"adverbs/time_early.mp3"},
+{english:"earlier",		translation:"مـِن شـُو َيـَة",	emoji:"⏱️",	audio:"adverbs/time_earlier.mp3"},
+{english:"this year",		translation:"ا ِلسـَنـَة د ِه",	emoji:"⏱️",	audio:"adverbs/time_thisyear.mp3"},
+{english:"ago",			translation:"مـِن",		emoji:"⏱️",	audio:"adverbs/time_ago.mp3"},
+{english:"next year",		translation:"ا ِلسـَنـَة ا ِلـلي جـَييـَة",		emoji:"⏱️",	audio:"adverbs/time_nextyear.mp3"},
+{english:"today",		translation:"ا ِلنـَها َرد َة",	emoji:"⏱️",	audio:"adverbs/time_today.mp3"},
+{english:"tonight",		translation:"ب ِا ِلليل",		emoji:"⏱️",	audio:"adverbs/time_tonight.mp3"},
+{english:"tomorrow",		translation:"بـُكر َه",		emoji:"⏱️",	audio:"adverbs/time_tomorrow.mp3"},
+{english:"yesterday",		translation:"إمبا َر ِح",		emoji:"⏱️",	audio:"adverbs/time_yesterday.mp3"},
+{english:"next week",		translation:"ا ِلأ ُسبو َع ا ِلّـِجا َي",emoji:"⏱️",	audio:"adverbs/time_nextweek.mp3"},
+{english:"this week",		translation:"ا ِلأ ُسبو َع د ِه",	emoji:"⏱️",	audio:"adverbs/time_thisweek.mp3"},
+{english:"last week",		translation:"ا ِلأ ُسبو َع إلّي فا َت",emoji:"⏱️",	audio:"adverbs/time_lastweek.mp3"},
+{english:"late",		translation:"مـِتأخّـَر",		emoji:"⏱️",	audio:"adverbs/time_late.mp3"},
+{english:"later",		translation:"بـَعدين",		emoji:"⏱️",	audio:"adverbs/time_later.mp3"},
+{english:"before",		translation:"قـَبل",		emoji:"⏱️",	audio:"adverbs/time_before.mp3"},
+{english:"after",		translation:"كـَما َن",		emoji:"⏱️",	audio:"adverbs/time_after.mp3"},
+{english:"evening",		translation:"بـِا ِلّيل",		emoji:"⏱️",	audio:"adverbs/time_evening.mp3"},
+
+// FREQUENCY
+{english:"always",		translation:"د َيماً",		emoji:"¹²³",	audio:"adverbs/frequency_always.mp3"},
+{english:"sometimes",		translation:"أحيا َناً",		emoji:"¹²³",	audio:"adverbs/frequency_sometimes.mp3"},
+{english:"often",		translation:"غـَلـِباً",		emoji:"¹²³",	audio:"adverbs/frequency_often.mp3"},
+{english:"every",		translation:"كـُلّ",		emoji:"¹²³",	audio:"adverbs/frequency_every.mp3"},
+{english:"once",		translation:"مـَرّ َة",		emoji:"¹²³",	audio:"adverbs/frequency_once.mp3"},
+{english:"again",		translation:"ثا َني",		emoji:"¹²³",	audio:"adverbs/frequency_again.mp3"},
+{english:"alot",		translation:"أوي",		emoji:"¹²³",	audio:"adverbs/frequency_alot.mp3"},
+{english:"a little",		translation:"شـُو َيـَة",		emoji:"¹²³",	audio:"adverbs/frequency_alittle.mp3"},
+{english:"never",		translation:"أبـَداً",		emoji:"¹²³",	audio:"adverbs/frequency_never.mp3"},
+{english:"rarely",		translation:"نا َد ِراً",		emoji:"¹²³",	audio:"adverbs/frequency_rarely.mp3"},
+{english:"usually",		translation:"عا َد َتاً",		emoji:"¹²³",	audio:"adverbs/frequency_usually.mp3"},
+{english:"all",			translation:"طول",		emoji:"¹²³",	audio:"adverbs/frequency_all.mp3"},
+{english:"twice",		translation:"مـَرّ َتين",		emoji:"¹²³",	audio:"adverbs/frequency_twice.mp3"},
+{english:"recently",		translation:"مـِن قـُر َيـِب",	emoji:"¹²³",	audio:"adverbs/frequency_recently.mp3"},
+{english:"long ago",		translation:"ز َما َن",		emoji:"¹²³",	audio:"adverbs/frequency_longago.mp3"},
+
+// QUALITY
+{english:"good",		translation:"عا َل",		emoji:"⭐",	audio:"adverbs/quality_good.mp3"},
+{english:"bad",			translation:"و ِحـِش",		emoji:"⭐",	audio:"adverbs/quality_bad.mp3"},
+{english:"fast",		translation:"سـَريع",		emoji:"⭐",	audio:"adverbs/quality_fast.mp3"},
+{english:"slow",		translation:"بـَطيء",		emoji:"⭐",	audio:"adverbs/quality_slow.mp3"},
+{english:"hard",		translation:"ب ِجـَدّ",		emoji:"⭐",	audio:"adverbs/quality_hard.mp3"},
+{english:"soft",		translation:"طـَري",		emoji:"⭐",	audio:"adverbs/quality_soft.mp3"},
+{english:"loud",		translation:"عا َلي",		emoji:"⭐",	audio:"adverbs/quality_loud.mp3"},
+{english:"quiet",		translation:"ها َدي",		emoji:"⭐",	audio:"adverbs/quality_quiet.mp3"},
+{english:"easy",		translation:"سـَهل",		emoji:"⭐",	audio:"adverbs/quality_easy.mp3"},
+{english:"difficult",		translation:"صـَعب",		emoji:"⭐",	audio:"adverbs/quality_difficult.mp3"},
+
+// CONJUNCTIVE
+{english:"so",			translation:"فا",		emoji:"💬",	audio:"adverbs/conjunctive_so.mp3"},
+{english:"then",		translation:"وَ",			emoji:"💬",	audio:"adverbs/conjunctive_then.mp3"},
+{english:"also",		translation:"كـَما َن",		emoji:"💬",	audio:"adverbs/conjunctive_also.mp3"},
+{english:"but",			translation:"بـَسّ",		emoji:"💬",	audio:"adverbs/conjunctive_but.mp3"},
+{english:"anyway",		translation:"عـَمـَتاً َ",		emoji:"💬",	audio:"adverbs/conjunctive_anyway.mp3"},
+{english:"finally",		translation:"أخيراً َ",		emoji:"💬",	audio:"adverbs/conjunctive_finally.mp3"},
+];
+
+var prepositions = [
+
+// TIME
+{english:"at",			translation:"في",		emoji:"⏱️",	audio:"prepositions/time_at.mp3"},
+{english:"in",			translation:"كـَما َن",		emoji:"⏱️",	audio:"prepositions/time_in.mp3"},
+{english:"on",			translation:"كـَما َن",		emoji:"⏱️",	audio:"prepositions/time_on.mp3"},
+{english:"after",		translation:"بـَعد",		emoji:"⏱️",	audio:"prepositions/time_after.mp3"},
+{english:"before",		translation:"قـَبل",		emoji:"⏱️",	audio:"prepositions/time_before.mp3"},
+{english:"during",		translation:"ا َثنا َء",		emoji:"⏱️",	audio:"prepositions/time_during.mp3"},
+{english:"since",		translation:"مـِن",		emoji:"⏱️",	audio:"prepositions/time_since.mp3"},
+{english:"till",		translation:"لـِحـَدّ",		emoji:"⏱️",	audio:"prepositions/time_until.mp3"},
+{english:"for",			translation:"لـِ",		emoji:"⏱️",	audio:"prepositions/time_for.mp3"},
+{english:"from",		translation:"مـِن",		emoji:"⏱️",	audio:"prepositions/time_from.mp3"},
+
+// LOCATION
+{english:"at",			translation:"عـَند",		emoji:"📍",	audio:"prepositions/location_at.mp3"},
+{english:"in",			translation:"في",		emoji:"📍",	audio:"prepositions/location_in.mp3"},
+{english:"on",			translation:"عـَلى",		emoji:"📍",	audio:"prepositions/location_on.mp3"},
+{english:"above/over",		translation:"فوق",		emoji:"📍",	audio:"prepositions/location_above.mp3"},
+{english:"below/under",		translation:"تـَحت",		emoji:"📍",	audio:"prepositions/location_below.mp3"},
+{english:"from",		translation:"مـِن",		emoji:"📍",	audio:"prepositions/location_from.mp3"},
+{english:"between",		translation:"بين",		emoji:"📍",	audio:"prepositions/location_between.mp3"},
+{english:"behind",		translation:"و َراَ",		emoji:"📍",	audio:"prepositions/location_behind.mp3"},
+{english:"beside",		translation:"جـَمب",		emoji:"📍",	audio:"prepositions/location_beside.mp3"},
+{english:"inside",		translation:"جـُواَ",		emoji:"📍",	audio:"prepositions/location_inside.mp3"},
+{english:"outside",		translation:"بـَراَ",		emoji:"📍",	audio:"prepositions/location_outside.mp3"},
+
+// RELATIONSHIP
+{english:"like",		translation:"ز َيي",		emoji:"🤝",	audio:"prepositions/relationship_like.mp3"},
+{english:"for",			translation:"لـِ",		emoji:"🤝",	audio:"prepositions/relationship_for.mp3"},
+{english:"with",		translation:"مـَعَ",		emoji:"🤝",	audio:"prepositions/relationship_with.mp3"},
+{english:"by",			translation:"مـِن",		emoji:"🤝",	audio:"prepositions/relationship_by.mp3"},
+{english:"about",		translation:"عـَن",		emoji:"🤝",	audio:"prepositions/relationship_about.mp3"},
+{english:"against",		translation:"عـَكس",		emoji:"🤝",	audio:"prepositions/relationship_against.mp3"},
+{english:"except",		translation:"إلّا",		emoji:"🤝",	audio:"prepositions/relationship_except.mp3"},
+{english:"without",		translation:"بـِلا",		emoji:"🤝",	audio:"prepositions/relationship_without.mp3"},
+
+
+// MOVEMENT
+{english:"to",			translation:"لـِ",		emoji:"👟",	audio:"prepositions/movement_to.mp3"},
+{english:"into",		translation:"في",		emoji:"👟",	audio:"prepositions/movement_into.mp3"},
+{english:"through",		translation:"عـَن",		emoji:"👟",	audio:"prepositions/movement_through.mp3"},
+{english:"across",		translation:"عـَدّي",		emoji:"👟",	audio:"prepositions/movement_across.mp3"},
+{english:"past",		translation:"أبـَعد مـِن",		emoji:"👟",	audio:"prepositions/movement_past.mp3"},
+];
+
+var items = animals;
+var alarm;
+// Function to select a random item and display its values
+function selectRandomItem() {
+  // Generate a random index within the range of the items array
+  var randomIndex = Math.floor(Math.random() * items.length);
+  var selectedItem = items[randomIndex];
+  var genderDefiniton
+
+  // Show all text content elements
+  var textContentElements = document.querySelectorAll('.hidden');
+  textContentElements.forEach(function(element) {
+  element.classList.remove('hidden');
+  });
+
+
+  if (selectedItem.gender == 'm') {
+    //genderDefiniton = "#E0F9FF"
+  }
+  else {
+    //genderDefiniton = "#FFE0E9"
+  }
+
+  // Update the HTML with the values of the selected item
+  document.getElementById('emoji').textContent = selectedItem.emoji;
+  document.getElementById('english').textContent = selectedItem.english;
+  document.getElementById('translation').textContent = selectedItem.translation;
+  document.getElementById('phonetic').innerHTML = selectedItem.phonetic;
+ // document.getElementById('gender').textContent = selectedItem.gender;
+  document.getElementById('contents').style.borderColor = genderDefiniton;
+  document.getElementById('translation').style.opacity = 0;
+  document.getElementById('phonetic').style.opacity = 0;
+  alarm = new Audio('audio/ar/' + selectedItem.audio);
+  //alarm = 'audio/' + selectedItem.audio;
+  //document.getElementById('gender').style.opacity = 0;
+}
+
+// Function to reveal translation, Phonetic, and Gender elements
+function revealAnswer() {
+  document.getElementById('translation').style.opacity = 1;
+  document.getElementById('phonetic').style.opacity = 1;
+  
+
+  //document.getElementById('gender').style.opacity = 1;
+}
+function playAudio() {
+  alarm.play();
+}
+function selectSubject(subject, name) {
+  items = subject;
+  //alert(document.getElementbyId('subjectTitle').textContent);
+  //document.getElementById('subjectTitle').textContent = name.toString();
+  selectRandomItem();
+}
+selectRandomItem();
+</script>
+
+</body>
+</html>
