@@ -179,6 +179,23 @@
     font-weight: bold;
   }
 
+  /* Tashkil toggle */
+  #tashkilBtn {
+    background: none;
+    border: 1.5px solid #ccc;
+    border-radius: 1em;
+    padding: .3em .7em;
+    font-size: .75em;
+    font-family: "Noto Sans", sans-serif;
+    cursor: pointer;
+    color: #999;
+    transition: .2s ease;
+  }
+  #tashkilBtn.active {
+    border-color: #D8533D;
+    color: #D8533D;
+  }
+
   /* Category label */
   #categoryLabel {
     font-size: .85em;
@@ -207,6 +224,7 @@
     <div id="header" class="spread">
       <a href="spanish.html"><img src="images/logo_ar.svg" alt="Lingobud - Arabic" width="48px" height="48px" class="left" style="border-radius: 2em;"></a>
       <p id="categoryLabel">Animals</p>
+      <button id="tashkilBtn" class="active" onclick="toggleTashkil()">Tashkil</button>
       <button id="menuBtn" onclick="openMenu()">
         <span></span><span></span><span></span>
       </button>
@@ -571,10 +589,39 @@ var adjectives = [
 
 var items = animals;
 var alarm;
+var shuffled = [];
+var shuffleIndex = 0;
+var showTashkil = true;
+
+function stripTashkil(text) {
+  return text.replace(/[ً-ٰٟ]/g, '');
+}
+
+function toggleTashkil() {
+  showTashkil = !showTashkil;
+  document.getElementById('tashkilBtn').classList.toggle('active', showTashkil);
+  var el = document.getElementById('translation');
+  if (el.dataset.raw) {
+    el.textContent = showTashkil ? el.dataset.raw : stripTashkil(el.dataset.raw);
+  }
+}
+
+function shuffleArray(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+  }
+  return a;
+}
 
 function selectRandomItem() {
-  var randomIndex = Math.floor(Math.random() * items.length);
-  var selectedItem = items[randomIndex];
+  if (shuffled.length === 0 || shuffleIndex >= shuffled.length) {
+    shuffled = shuffleArray(items);
+    shuffleIndex = 0;
+  }
+  var selectedItem = shuffled[shuffleIndex];
+  shuffleIndex++;
 
   var textContentElements = document.querySelectorAll('.hidden');
   textContentElements.forEach(function(element) {
@@ -583,9 +630,11 @@ function selectRandomItem() {
 
   document.getElementById('emoji').textContent = selectedItem.emoji;
   document.getElementById('english').textContent = selectedItem.english;
-  document.getElementById('translation').textContent = selectedItem.translation;
+  var translEl = document.getElementById('translation');
+  translEl.dataset.raw = selectedItem.translation;
+  translEl.textContent = showTashkil ? selectedItem.translation : stripTashkil(selectedItem.translation);
   document.getElementById('phonetic').innerHTML = selectedItem.phonetic;
-  document.getElementById('translation').style.opacity = 0;
+  translEl.style.opacity = 0;
   document.getElementById('phonetic').style.opacity = 0;
   if (selectedItem.audio) {
     alarm = new Audio('audio/ar/' + selectedItem.audio);
@@ -605,6 +654,8 @@ function playAudio() {
 
 function selectSubject(subject, name) {
   items = subject;
+  shuffled = [];
+  shuffleIndex = 0;
   document.getElementById('categoryLabel').textContent = name;
   closeMenu();
   selectRandomItem();
