@@ -179,8 +179,42 @@
     font-weight: bold;
   }
 
+  /* Reveal button */
+  #revealBtn {
+    background-color: #D8533D;
+    color: white;
+    border: none;
+    border-radius: .5em;
+    padding: .75em 2em;
+    font-size: 1.1em;
+    font-family: "Noto Sans", sans-serif;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+    user-select: none;
+  }
+  #revealBtn:active {
+    transform: scale(1.05);
+  }
+
+  /* Footer layout */
+  #footer {
+    display: flex;
+    align-items: center;
+    padding: 1em 0;
+    position: relative;
+  }
+  #footer .large {
+    position: absolute;
+    left: 0;
+  }
+  #footer #revealBtn {
+    margin: 0 auto;
+  }
+
   /* Tashkil toggle */
   #tashkilBtn {
+    position: absolute;
+    right: 0;
     background: none;
     border: 1.5px solid #ccc;
     border-radius: 1em;
@@ -224,7 +258,6 @@
     <div id="header" class="spread">
       <a href="spanish.html"><img src="images/logo_ar.svg" alt="Lingobud - Arabic" width="48px" height="48px" class="left" style="border-radius: 2em;"></a>
       <p id="categoryLabel">Animals</p>
-      <button id="tashkilBtn" class="active" onclick="toggleTashkil()">Tashkil</button>
       <button id="menuBtn" onclick="openMenu()">
         <span></span><span></span><span></span>
       </button>
@@ -237,9 +270,10 @@
       <p id="translation-p"><span id="translation" class="hidden"></span></p>
       <p id="phonetic-p"><span id="phonetic" class="hidden"></span></p>
     </div>
-    <div id="footer" class="spread">
-      <div class="large" onclick="selectRandomItem()"><img src="images/btn_shuffle.svg" alt="Shuffle" width="80px" height="80px"></div>
-      <div class="large" onclick="revealAnswer()" style="margin-right: 0;"><img src="images/btn_reveal.svg" alt="Reveal" width="80px" height="80px"></div>
+    <div id="footer">
+      <div class="large" onclick="selectRandomItem()"><img src="images/btn_shuffle.svg" alt="Shuffle" width="60px" height="60px"></div>
+      <button id="revealBtn" onclick="revealAnswer()">Reveal</button>
+      <button id="tashkilBtn" class="active" onclick="toggleTashkil()">Tashkil</button>
     </div>
   </div>
 
