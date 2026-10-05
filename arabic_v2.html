@@ -244,9 +244,7 @@
   <div id="sideMenu">
     <button id="menuClose" onclick="closeMenu()">✕</button>
     <div class="menu-title">Categories</div>
-    <button class="menu-item" onclick="selectSubject(animals, 'Animals')">Animals</button>
-    <button class="menu-item" onclick="selectSubject(food, 'Food')">Food</button>
-    <button class="menu-item" onclick="selectSubject(places, 'Places')">Places</button>
+    <button class="menu-item" onclick="selectSubject(nouns, 'Nouns')">Nouns</button>
     <button class="menu-item" onclick="selectSubject(verbs, 'Verbs')">Verbs</button>
     <button class="menu-item" onclick="selectSubject(adverbs, 'Adverbs')">Adverbs</button>
     <button class="menu-item" onclick="selectSubject(prepositions, 'Prepositions')">Prepositions</button>
@@ -257,7 +255,7 @@
   <div class="wrapper">
     <div id="header" class="spread">
       <a href="spanish.html"><img src="images/logo_ar.svg" alt="Lingobud - Arabic" width="48px" height="48px" class="left" style="border-radius: 2em;"></a>
-      <p id="categoryLabel">Animals</p>
+      <p id="categoryLabel">Nouns</p>
       <button id="menuBtn" onclick="openMenu()">
         <span></span><span></span><span></span>
       </button>
@@ -277,53 +275,8 @@
     </div>
   </div>
 
+<script src="nouns.js"></script>
 <script>
-var animals = [
-  {english: "Dog", translation: "كلب", gender: "m", phonetic: "<u>Kalb</u>", emoji: "🐶", audio: "animals/dog.mp3"},
-  {english: "Cat", translation: "قـُطّـَة", gender: "f", phonetic: "<u>'ut</u>ta", emoji: "🐱", audio: "animals/cat.mp3"},
-  {english: "Mouse", translation: "فار", gender: "m", phonetic: "<u>faar</u>", emoji: "🐭", audio: "animals/mouse.mp3"},
-  {english: "Camel", translation: "جـَمـَل", gender: "m", phonetic: "<u>ga</u>mal", emoji: "🐪", audio: "animals/camel.mp3"},
-  {english: "Rabbit", translation: "أرنـَب", gender: "m", phonetic: "<u>'ar</u>nab", emoji: "🐰", audio: "animals/rabbit.mp3"},
-  {english: "Bear", translation: "دبّ", gender: "m", phonetic: "<u>dibb</u>", emoji: "🐻", audio: "animals/bear.mp3"},
-  {english: "Tiger", translation: "نـِمر", gender: "m", phonetic: "<u>nmir</u>", emoji: "🐯", audio: "animals/tiger.mp3"},
-  {english: "Lion", translation: "أسـَد", gender: "m", phonetic: "<u>'a</u>sad", emoji: "🦁", audio: "animals/lion.mp3"},
-  {english: "Monkey", translation: "قـِرد", gender: "m", phonetic: "<u>'ird</u>", emoji: "🐵", audio: "animals/monkey.mp3"},
-  {english: "Elephant", translation: "فيل", gender: "m", phonetic: "<u>feel</u>", emoji: "🐘", audio: "animals/elephant.mp3"},
-  {english: "Snake", translation: "ثـَعبان", gender: "m", phonetic: "thaAb<u>aen</u>", emoji: "🐍", audio: "animals/snake.mp3"},
-  {english: "Insect", translation: "حـَشـَرة", gender: "f", phonetic: "ha<u>sha</u>ra", emoji: "🐛", audio: "animals/insect.mp3"},
-  {english: "Bird", translation: "طير", gender: "m", phonetic: "<u>teer</u>", emoji: "🐦", audio: "animals/bird.mp3"},
-  {english: "Fish", translation: "سـَمـَك",gender: "coll", phonetic: "<u>sa</u>mak", emoji: "🐟", audio: "animals/fish.mp3"},
-  {english: "Cow", translation: "بـَقـَر",gender: "coll", phonetic: "<u>ba</u>'ar", emoji: "🐮", audio: "animals/cow.mp3"},
-  {english: "Horse", translation: "حـُصان", gender: "m", phonetic: "hu<u>saan</u>", emoji: "🐴", audio: "animals/horse.mp3"},
-  {english: "Chicken", translation: "فـَرخـَة", gender: "f", phonetic: "<u>far</u>cha", emoji: "🐔", audio: "animals/chicken.mp3"},
-  {english: "Pig", translation: "خـَنزير", gender: "m", phonetic: "chan<u>zeer</u>", emoji: "🐷", audio: "animals/pig.mp3"},
-  {english: "Sheep", translation: "خـَروف", gender: "m", phonetic: "<u>cha</u>roof", emoji: "🐑", audio: "animals/sheep.mp3"},
-];
-var food = [
-  {english: "Apple", translation: "تـُفّاح", gender: "coll", phonetic: "tuf<u>faeh</u>", emoji: "🍏", audio: "food/apple.mp3"},
-  {english: "Orange", translation: "بـُرتـُقان", gender: "coll", phonetic: "burtu'aan", emoji: "🍊", audio: "food/orange.mp3"},
-  {english: "Banana", translation: "موز", gender: "coll", phonetic: "mooz", emoji: "🍌", audio: "food/banana.mp3"},
-  {english: "Strawberry", translation: "فـَراولـَة", gender: "coll", phonetic: "fa<u>raw</u>la", emoji: "🍓", audio: "food/strawberry.mp3"},
-  {english: "Lemon", translation: "لـَيمون", gender: "coll", phonetic: "<u>lay</u>moon", emoji: "🍋", audio: "food/lemon.mp3"},
-  {english: "Tomato", translation: "طـَماطـِم", gender: "coll", phonetic: "ta<u>maa</u>tin", emoji: "🍅", audio: "food/tomato.mp3"},
-  {english: "Carrot", translation: "جـَزر", gender: "coll", phonetic: "g<u>a</u>zar", emoji: "🥕", audio: "food/carrot.mp3"},
-  {english: "Onion", translation: "بـَصـَل", gender: "coll", phonetic: "<u>ba</u>sal", emoji: "🧅", audio: "food/onion.mp3"},
-  {english: "Garlic", translation: "ثوم", gender: "coll", phonetic: "<u>thoom</u>", emoji: "🧄", audio: "food/garlic.mp3"},
-  {english: "Potato", translation: "بـَطاطـِس", gender: "coll", phonetic: "ba<u>taa</u>tis", emoji: "🥔", audio: "food/potato.mp3"},
-  {english: "Pepper", translation: "فـِلفـِل رومي", gender: "m", phonetic: "<u>fil</u>fil <u>roo</u>mi", emoji: "🫑", audio: "food/pepper.mp3"},
-  {english: "Cucumber", translation: "خـِيا َر", gender: "coll", phonetic: "<u>chiyaar</u>", emoji: "🥒", audio: "food/cucumber.mp3"},
-  {english: "Aubergine", translation: "بـِتـِنجان", gender: "coll", phonetic: "biting<u>aen</u>", emoji: "🍆", audio: "food/aubergine.mp3"},
-  {english: "Courgette", translation: "كوسـَة", gender: "coll", phonetic: "<u>koo</u>sa", emoji: "", audio: "food/courgette.mp3"},
-  {english: "Cheese", translation: "جـِبنـَة", gender: "f", phonetic: "g<u>ib</u>na", emoji: "🧀", audio: "food/cheese.mp3"},
-  {english: "Milk", translation: "لـَبـَن", gender: "m", phonetic: "<u>la</u>ban", emoji: "🥛", audio: "food/milk.mp3"},
-  {english: "Butter", translation: "ز ِبدة", gender: "f", phonetic: "<u>zib</u>da", emoji: "🧈", audio: "food/butter.mp3"},
-  {english: "Eggs", translation: "بيض", gender: "coll", phonetic: "<u>beed</u>", emoji: "🥚", audio: "food/eggs.mp3"},
-  {english: "Bread", translation: "عيش", gender: "m", phonetic: "<u>Aeesh</u>", emoji: "🍞", audio: "food/bread.mp3"},
-  {english: "Pasta", translation: "مـَكـَرونـَة", gender: "f", phonetic: "maka<u>roon</u>a", emoji: "🍝", audio: "food/pasta.mp3"},
-  {english: "Rice", translation: "رزّ", gender: "m", phonetic: "</u>ruzz</u>", emoji: "🍚", audio: "food/rice.mp3"},
-  {english: "Chicken", translation: "فـِراخ", gender: "m", phonetic: "fi<u>raech</u>", emoji: "🍗", audio: "food/chicken.mp3"},
-  {english: "Beef", translation: "لـَحمـَة", gender: "f", phonetic: "<u>lah</u>ma", emoji: "🥩", audio: "food/beef.mp3"},
-];
 var colours = [
   {english: "Black", translation: "إسود", gender: "m", phonetic: "<u>'is</u>wid", emoji: "⚫", audio: "colours/black.mp3"},
   {english: "Grey", translation: "ر ُصاصي", gender: "m", phonetic: "ru<u>saa</u>si", emoji: "⚫", audio: "colours/grey.mp3"},
@@ -335,28 +288,6 @@ var colours = [
   {english: "Blue", translation: "أزر َق", gender: "m", phonetic: "azra'", emoji: "🔵", audio: "colours/blue.mp3"},
   {english: "Purple", translation: "بـَنـَفسـِجي", gender: "invar", phonetic: "banaf<u>sigi</u>", emoji: "🟣", audio: "colours/purple.mp3"},
   {english: "Brown", translation: "بـُنّي", gender: "invar", phonetic: "<u>bun</u>ni", emoji: "🟤", audio: "colours/brown.mp3"},
-];
-var places = [
-  {english: "Bike", translation: "عـَجـَلـَة", gender: "f", phonetic: "Aag<u>a</u>la", emoji: "🚲", audio: "places/bicycle.mp3"},
-  {english: "Car", translation: "عـَربـِيـَة", gender: "f", phonetic: "Aa<u>ra</u>biya", emoji: "🚗", audio: "places/car.mp3"},
-  {english: "Bus", translation: "أتوبيس", gender: "m", phonetic: "utoo<u>baas</u>", emoji: "🚌", audio: "places/bus.mp3"},
-  {english: "Train", translation: "اطر", gender: "m", phonetic: "<u>atr</u>", emoji: "🚂", audio: "places/train.mp3"},
-  {english: "Aeroplane", translation: "طـَيا َر َة", gender: "f", phonetic: "<u>tayaa</u>ra", emoji: "🛩️", audio: "places/aeroplane.mp3"},
-  {english: "Boat", translation: "مـَركـِب", gender: "m", phonetic: "<u>mar</u>kib", emoji: "⛵", audio: "places/boat.mp3"},
-  {english: "Helicopter", translation: "هيليكـُبتـُر", gender: "m", phonetic: "heelee<u>kub</u>tur", emoji: "🚁", audio: "places/helicopter.mp3"},
-  {english: "Kitchen", translation: "مـَطبـَخ", gender: "m", phonetic: "<u>mat</u>bach", emoji: "", audio: "places/kitchen.mp3"},
-  {english: "Bathroom", translation: "حـَمّا َم", gender: "m", phonetic: "ham<u>maem</u>", emoji: "", audio: "places/bathroom.mp3"},
-  {english: "Lounge", translation: " ُوضـِة قـُعا َد", gender: "f", phonetic: "'uoo<u>dit</u> 'u<u>Aaed</u>", emoji: "", audio: "places/lounge.mp3"},
-  {english: "Bedroom", translation: "أ ُوضـِة نوم", gender: "f", phonetic: "'uoo<u>dit</u> <u>noom</u>", emoji: "", audio: "places/bedroom.mp3"},
-  {english: "Office", translation: "مـَكتـَب", gender: "m", phonetic: "<u>mak</u>tab", emoji: "", audio: "places/office.mp3"},
-  {english: "House", translation: "بـِيت", gender: "m", phonetic: "<u>biyt</u>", emoji: "", audio: "places/house.mp3"},
-  {english: "Apartment", translation: "شـَقّـَة", gender: "f", phonetic: "<u>sha'</u>'a", emoji: "", audio: "places/apartment.mp3"},
-  {english: "Shop", translation: "مـَحـَلّ", gender: "m", phonetic: "ma<u>hall</u>", emoji: "", audio: "places/shop.mp3"},
-  {english: "Street", translation: "شارع", gender: "m", phonetic: "<u>shae</u>riA", emoji: "", audio: "places/street.mp3"},
-  {english: "Station", translation: "مـَحـَطّـَة", gender: "f", phonetic: "ma<u>hat</u>ta", emoji: "", audio: "places/station.mp3"},
-  {english: "Airport", translation: "مـَطا َر", gender: "m", phonetic: "ma<u>taar</u>", emoji: "", audio: "places/airport.mp3"},
-  {english: "Restaurant", translation: "مـَطعـَم", gender: "m", phonetic: "<u>mat</u>Aam", emoji: "", audio: "places/restaurant.mp3"},
-  {english: "Cinema", translation: "سينـِما", gender: "m", phonetic: "see<u>n</u>ima", emoji: "", audio: "places/cinema.mp3"},
 ];
 var verbs = [
 {english:"To arrive",		translation:"وِصِل",	phonetic: "Wisal",		emoji: "🟢",	audio:"verbs/verb_arrive.mp3"},
@@ -621,7 +552,7 @@ var adjectives = [
 {english:"dead",		translation:"مَيِّت",		phonetic:"mayyet",		emoji:"🟢",	audio:"adjectives/099_dead.mp3"},
 ];
 
-var items = animals;
+var items = nouns;
 var alarm;
 var shuffled = [];
 var shuffleIndex = 0;
